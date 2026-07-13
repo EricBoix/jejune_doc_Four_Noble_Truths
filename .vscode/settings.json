@@ -1,0 +1,15 @@
+{
+    "cSpell.customDictionaries": {
+        "Four-Noble-Truths-words": {
+            "name": "Four_Noble_Truths",
+            "path": "${workspaceRoot}/Four_Noble_Truths-words.txt",
+            "description": "Words used the Four Noble Truths",
+            "addWords": true
+        },
+        "Four_Noble_Truths": true
+    },
+    "[markdown]": {
+        "editor.wordWrap": "bounded",
+        "editor.wordWrapColumn": 80
+    },
+}

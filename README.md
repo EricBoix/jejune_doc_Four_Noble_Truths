@@ -20,7 +20,7 @@ and if we remove the document structure information (Document type nodes) we get
 
 ## Running the full data workflow
 
-Fetch [jj_workflow_shell](https://github.com/EricBoix/jj_workflow_shell#fetch-the-workflow-utilities) 
+Fetch [jj_workflow_shell](https://github.com/EricBoix/jj_workflow_shell#fetch-the-workflow-utilities)
 
 ```bash
 cd `git rev-parse --show-toplevel`         # Implicit from now on
