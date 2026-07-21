@@ -20,64 +20,48 @@ and if we remove the document structure information (Document type nodes) we get
 
 ## Running the full data workflow
 
-Fetch [jj_workflow_shell](https://github.com/EricBoix/jj_workflow_shell#fetch-the-workflow-utilities)
+Install and configure [`jejune_cli`](https://github.com/EricBoix/jejune_cli), then run `jejune doctor` to verify the configuration. This boils down to
 
 ```bash
-cd `git rev-parse --show-toplevel`         # Implicit from now on
-git clone https://github.com/EricBoix/jj_workflow_shell.git
-source jj_workflow_shell/init.bash
+uv tool install git+https://github.com/EricBoix/jejune_cli
+jejune configuration init     
+# Proceed with the configuration of the files located in .jejune/ dir
+jejune doctor
 ```
 
-and [configure it](https://github.com/EricBoix/jj_workflow_shell#configure-the-shell-utilities) by editing the resulting `.env` file.
-
-Define your target directories
+Define a convenience variable for the results directory:
 
 ```bash
-set +a                                     # For vscode command runner execution
-export RESULTS_DIR=`pwd`/result_data       # Syntactic sugar
-export DATABASE_DIR=$RESULTS_DIR/database
-\rm -fr $DATABASE_DIR                      # Clean slate from previous run
+export RESULTS_DIR=`pwd`/result_data
 ```
 
 Note: no need for `pdf` conversion since the original data is here in a markdown format.
 
-Prerequisite to Knowledge Graph (KG) extraction: launch a neo4j database
+Run the (Knowledge Graph) extraction (launch a neo4j database is a prerequisite)
 
 ```bash
-jj_neo4j_launch_db $RESULTS_DIR $NEO4J_PORT $NEO4J_USERNAME/$NEO4J_PASSWORD
-```
-
-Run the (Knowledge Graph) extraction
-
-```bash
-jj_extract_knowledge_graph `pwd`/original_data '--load_markdown_document 250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation.md' 
+jejune neo4j start $RESULTS_DIR
+jejune graph extract `pwd`/original_data \
+  --load_markdown_document \
+  250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation.md
+jejune neo4j stats --assert 12/15
 ```
 
 Dump the database content for later usage (optional)
 
 ```bash
-jj_neo4j_dump_database $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
+jejune neo4j stop
+jejune neo4j dump $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
 ```
 
-In order to validate the dump, erase the database and restore it (out of the
-previous dump)...
+Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format (initial restoration valides the previous dump):
 
 ```bash
-# WARNING: this DELETEs the existing database
-jj_neo4j_restore_database $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
-```
-
-Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format:
-
-```bash
-jj_neo4j_launch_db $RESULTS_DIR $NEO4J_PORT $NEO4J_USERNAME/$NEO4J_PASSWORD
-jj_dump_knowledge_graph_in_turtle $RESULTS_DIR Four-Noble-Truths-Wikipedia-translation-Markdown.ttl
-```
-
-Eventually turn the context off:
-
-```bash
-jj_neo4j_stop_db
+# WARNING: restoring DELETEs the existing database
+jejune neo4j restore $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
+jejune neo4j start $RESULTS_DIR
+jejune neo4j dump-turtle $RESULTS_DIR Four-Noble-Truths-Wikipedia-translation-Markdown.ttl
+jejune neo4j stop
 ```
 
 ## Sentence-based Knowledge Graph extraction
@@ -85,11 +69,20 @@ jj_neo4j_stop_db
 Instead of defaulting to document structure aware chunking, we can use a sentence based chunking as follows
 
 ```bash
-jj_extract_knowledge_graph `pwd`/original_data '--load_markdown_document 250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation.md --load_json_document Four_Noble_Truth_-_Sentences_as_LangChain_document.json' 
+jejune neo4j delete $RESULTS_DIR
+jejune neo4j stats --assert 0/0
+jejune graph extract `pwd`/original_data \
+  --load_markdown_document \
+  250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation.md \
+  --load_json_document \
+  Four_Noble_Truth_-_Sentences_as_LangChain_document.json
+jejune neo4j stats --assert 28/56
 ```
 
 ```bash
-jj_neo4j_dump_database $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation-added-sentences.Markdown.dump
+jejune neo4j stop
+jejune neo4j dump $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation-added-sentences.Markdown.dump
+jejune neo4j stop
 ```
 
 which yields

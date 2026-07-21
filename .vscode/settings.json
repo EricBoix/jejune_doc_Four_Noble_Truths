@@ -12,4 +12,8 @@
         "editor.wordWrap": "bounded",
         "editor.wordWrapColumn": 80
     },
+    "files.associations": {
+        "env-config": "dotenv",
+        "env-secrets": "dotenv"
+    },
 }
