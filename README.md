@@ -54,7 +54,7 @@ jejune neo4j stop
 jejune neo4j dump $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
 ```
 
-Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format (initial restoration valides the previous dump):
+Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format (initial restoration validates the previous dump):
 
 ```bash
 # WARNING: restoring DELETEs the existing database
