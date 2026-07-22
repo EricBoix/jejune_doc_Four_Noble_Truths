@@ -37,7 +37,7 @@ export RESULTS_DIR=`pwd`/result_data
 
 Note: no need for `pdf` conversion since the original data is here in a markdown format.
 
-Run the (Knowledge Graph) extraction (launch a neo4j database is a prerequisite)
+Run the (Knowledge Graph) extraction (starting a neo4j database is a prerequisite)
 
 ```bash
 jejune neo4j start $RESULTS_DIR
@@ -47,7 +47,7 @@ jejune graph extract `pwd`/original_data \
 jejune neo4j stats --assert 12/15
 ```
 
-Dump the database content for later usage (optional)
+Optional: dump the database content for later usage (and restore it to assert dump integrity/validity)
 
 ```bash
 jejune neo4j stop
@@ -59,7 +59,7 @@ jejune neo4j start $RESULTS_DIR
 jejune neo4j stats --assert 12/15
 ```
 
-Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format (initial restoration validates the previous dump):
+Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format
 
 ```bash
 jejune neo4j dump-turtle $RESULTS_DIR Four-Noble-Truths-Wikipedia-translation-Markdown.ttl
