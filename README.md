@@ -52,21 +52,23 @@ Dump the database content for later usage (optional)
 ```bash
 jejune neo4j stop
 jejune neo4j dump $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
+# Restore the database out of the dump (just to make sure)
+# WARNING: restoring DELETEs the existing database
+jejune neo4j restore $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
+jejune neo4j start $RESULTS_DIR
+jejune neo4j stats --assert 12/15
 ```
 
 Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format (initial restoration validates the previous dump):
 
 ```bash
-# WARNING: restoring DELETEs the existing database
-jejune neo4j restore $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation.Markdown.dump
-jejune neo4j start $RESULTS_DIR
 jejune neo4j dump-turtle $RESULTS_DIR Four-Noble-Truths-Wikipedia-translation-Markdown.ttl
 jejune neo4j stop
 ```
 
 ## Sentence-based Knowledge Graph extraction
 
-Instead of defaulting to document structure aware chunking, we can use a sentence based chunking as follows
+Instead of defaulting to document structure aware chunking, we can use an additional sentence based chunking as follows
 
 ```bash
 jejune neo4j delete $RESULTS_DIR
@@ -79,10 +81,11 @@ jejune graph extract `pwd`/original_data \
 jejune neo4j stats --assert 28/56
 ```
 
+Eventually dump the database for later usage
+
 ```bash
 jejune neo4j stop
 jejune neo4j dump $RESULTS_DIR neo4j.Four-Noble-Truths-Wikipedia-translation-added-sentences.Markdown.dump
-jejune neo4j stop
 ```
 
 which yields
