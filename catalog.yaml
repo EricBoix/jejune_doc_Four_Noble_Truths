@@ -1,8 +1,11 @@
-title: "Four Noble Truths — Dhammacakkappavattana Sutta (Wikipedia Translation)"
+title: "Four Noble Truths - Dhammacakkappavattana Sutta (Wikipedia Translation)"
 authors: []
 year: -250
 keywords: ["Buddhism", "Four Noble Truths", "Dhammacakkappavattana Sutta", "Pali Canon"]
+slug: four-noble-truths
 
 markdown_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation.md
-sentences_file: original_data/Four_Noble_Truth_-_Sentences_as_LangChain_document.json
-turtle_file: result_data/Four-Noble-Truths-Wikipedia-translation-Markdown.ttl
+headers_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Headers_as_LangChain_document.json
+paragraphs_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Paragraphs_as_LangChain_document.json
+sentences_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Sentences_as_LangChain_document.json
+turtle_file: result_data/Four-Noble-Truths-Wikipedia-translation-HeadersAndSentences_chunking.ttl
