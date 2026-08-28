@@ -58,7 +58,7 @@ Run the (Knowledge Graph) extraction (starting a neo4j database is a prerequisit
 jejune neo4j start $RESULTS_DIR
 jejune graph extract `pwd` \
   --load_json_document /data/original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Headers_as_LangChain_document.json
-jejejune neo4j stats --assert 12/15
+jejune neo4j stats --assert 12/15
 ```
 
 Extract knowledge graph in [Turtle](https://en.wikipedia.org/wiki/Turtle_(syntax)) format
