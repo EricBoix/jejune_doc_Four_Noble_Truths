@@ -5,7 +5,9 @@ keywords: ["Buddhism", "Four Noble Truths", "Dhammacakkappavattana Sutta", "Pali
 slug: four-noble-truths
 
 markdown_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation.md
-headers_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Headers_as_LangChain_document.json
-paragraphs_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Paragraphs_as_LangChain_document.json
-sentences_file: original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Sentences_as_LangChain_document.json
-turtle_file: result_data/Four-Noble-Truths-Wikipedia-translation-HeadersAndSentences_chunking.ttl
+
+graph_extractions:
+  - model_name:       unknown
+    chunk_short_name: HeadersAndSentences
+    chunk_file:       original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Sentences_as_LangChain_document.json
+    turtle_file:      result_data/Four-Noble-Truths-Wikipedia-translation-HeadersAndSentences_chunking.ttl
