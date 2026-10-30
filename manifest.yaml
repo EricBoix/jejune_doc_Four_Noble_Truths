@@ -11,3 +11,8 @@ graph_extractions:
     chunk_short_name: HeadersAndSentences
     chunk_file:       original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Sentences_as_LangChain_document.json
     turtle_file:      result_data/Four-Noble-Truths-Wikipedia-translation-HeadersAndSentences_chunking.ttl
+
+  - model_name:       qwen3_8_27b
+    chunk_short_name: Sentences
+    chunk_file:       original_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Sentences_as_LangChain_document.json
+    turtle_file:      result_data/250_BCE_-_Dhammacakkappavattana_Sutta_Four_Noble_Truths_Wikipedia_translation_-_Sentences.qwen3_8_27b.ttl
